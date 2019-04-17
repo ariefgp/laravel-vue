@@ -1901,7 +1901,6 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     var uri = '/api/post/edit/' + this.$route.params.id;
-    console.log('The id is: ' + this.$route.params.id);
     this.axios.get(uri).then(function (response) {
       _this.post = response.data;
     });
@@ -1910,7 +1909,7 @@ __webpack_require__.r(__webpack_exports__);
     updatePost: function updatePost() {
       var _this2 = this;
 
-      var uri = '/api/post/update/${this.$route.params.id}';
+      var uri = '/api/post/update/' + this.$route.params.id;
       this.axios.post(uri, this.post).then(function (response) {
         _this2.$router.push({
           name: 'posts'
@@ -2012,7 +2011,7 @@ __webpack_require__.r(__webpack_exports__);
     deletePost: function deletePost(id) {
       var _this2 = this;
 
-      var uri = '/api/post/delete/${id}';
+      var uri = '/api/post/delete/' + id;
       this.axios["delete"](uri).then(function (response) {
         _this2.posts.splice(_this2.posts.indexOf(id), 1);
       });
@@ -38365,7 +38364,20 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _vm._m(1, true)
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  on: {
+                    click: function($event) {
+                      return _vm.deletePost(post.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              )
+            ])
           ])
         }),
         0
@@ -38388,14 +38400,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Actions")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Delete")])
     ])
   }
 ]
